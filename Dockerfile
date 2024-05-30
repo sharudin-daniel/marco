@@ -8,7 +8,7 @@ WORKDIR /app
 COPY target/marco-0.0.1-SNAPSHOT.jar marco.jar
 
 # Expose the port your application runs on
-EXPOSE 8081
+EXPOSE 8080
 
 # Command to run the JAR file
 ENTRYPOINT ["java", "-jar", "marco.jar"]
