@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @RestController
 @RequestMapping
@@ -23,5 +24,17 @@ public class BaseController {
     public String marcoPoloHandshake() {
         var poloResp = poloClient.getPolo();
         return "marco + " + poloResp;
+    }
+
+    @GetMapping("/marco_polo/webclient")
+    public String marcoPoloHandshakeWebClient() {
+            var resp = WebClient.builder()
+                    .baseUrl("http://polo:8083")
+                    .build()
+                    .get()
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
+        return "marco + " + resp;
     }
 }
