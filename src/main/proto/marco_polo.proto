@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package dsharudin.marco_polo.grpc;
+
+message MarcoRequest {
+  string name = 1;
+}
+
+message PoloResponse {
+  string name = 1;
+}
+
+service MarcoPoloService {
+  rpc getPolo(MarcoRequest) returns (PoloResponse) {}
+//  rpc marcoStream(stream MarcoRequest) returns (PoloResponse) {}
+//  rpc poloStream(MarcoRequest) returns (stream PoloResponse) {}
+//  rpc marcoPoloStream(stream MarcoRequest) returns (stream PoloResponse) {}
+}
