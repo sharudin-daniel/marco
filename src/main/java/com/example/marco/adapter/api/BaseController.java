@@ -1,6 +1,7 @@
 package com.example.marco.adapter.api;
 
 import com.example.marco.adapter.feign.PoloClient;
+import com.example.marco.adapter.grpc.PoloServiceCall;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class BaseController {
 
     private final PoloClient poloClient;
+    private final PoloServiceCall poloServiceCall;
 
     @GetMapping
     public String life() {
@@ -36,5 +38,10 @@ public class BaseController {
                     .bodyToMono(String.class)
                     .block();
         return "marco + " + resp;
+    }
+
+    @GetMapping("/marco_polo/grpc")
+    public String marcoPoloHandshakeGrpc() {
+        return poloServiceCall.getPoloGrpc("Marco request").getName();
     }
 }
